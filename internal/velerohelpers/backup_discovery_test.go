@@ -384,3 +384,10 @@ func (m *mockStatusWriter) Patch(ctx context.Context, obj client.Object, patch c
 	}
 	return nil
 }
+
+func (m *mockStatusWriter) Apply(ctx context.Context, obj runtime.ApplyConfiguration, opts ...client.SubResourceApplyOption) error {
+	if m.shouldFail {
+		return errors.New("mock status writer error")
+	}
+	return nil
+}

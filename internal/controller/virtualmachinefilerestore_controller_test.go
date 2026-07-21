@@ -38,6 +38,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/rest"
+	"k8s.io/client-go/tools/events"
 	"k8s.io/client-go/tools/record"
 	kubevirtv1 "kubevirt.io/api/core/v1"
 	"sigs.k8s.io/controller-runtime/pkg/cache"
@@ -50,6 +51,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
+	"sigs.k8s.io/controller-runtime/pkg/webhook/conversion"
 
 	oadpv1alpha1 "github.com/migtools/oadp-vm-file-restore/api/v1alpha1"
 	oadptypes "github.com/migtools/oadp-vm-file-restore/api/v1alpha1/types"
@@ -6923,9 +6925,11 @@ func (f *fakeManager) AddMetricsExtraHandler(path string, handler http.Handler) 
 func (f *fakeManager) AddMetricsServerExtraHandler(path string, handler http.Handler) error {
 	return nil
 }
-func (f *fakeManager) GetHTTPClient() *http.Client      { return nil }
-func (f *fakeManager) GetWebhookServer() webhook.Server { return nil }
-func (f *fakeManager) GetConfig() *rest.Config          { return nil }
+func (f *fakeManager) GetHTTPClient() *http.Client                       { return nil }
+func (f *fakeManager) GetWebhookServer() webhook.Server                  { return nil }
+func (f *fakeManager) GetConfig() *rest.Config                           { return nil }
+func (f *fakeManager) GetConverterRegistry() conversion.Registry         { return nil }
+func (f *fakeManager) GetEventRecorder(name string) events.EventRecorder { return nil }
 
 func TestFindRouteHost(t *testing.T) {
 	scheme := runtime.NewScheme()
