@@ -20,6 +20,7 @@ import (
 	"github.com/migtools/oadp-vm-file-restore/api/v1alpha1/types"
 	veleroapi "github.com/vmware-tanzu/velero/pkg/apis/velero/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
 )
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
@@ -359,5 +360,9 @@ type VirtualMachineFileRestoreList struct {
 }
 
 func init() {
-	SchemeBuilder.Register(&VirtualMachineFileRestore{}, &VirtualMachineFileRestoreList{})
+	SchemeBuilder.Register(func(scheme *runtime.Scheme) error {
+		scheme.AddKnownTypes(GroupVersion, &VirtualMachineFileRestore{}, &VirtualMachineFileRestoreList{})
+		metav1.AddToGroupVersion(scheme, GroupVersion)
+		return nil
+	})
 }

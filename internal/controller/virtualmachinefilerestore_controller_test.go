@@ -6925,10 +6925,10 @@ func (f *fakeManager) AddMetricsExtraHandler(path string, handler http.Handler) 
 func (f *fakeManager) AddMetricsServerExtraHandler(path string, handler http.Handler) error {
 	return nil
 }
-func (f *fakeManager) GetHTTPClient() *http.Client                { return nil }
-func (f *fakeManager) GetWebhookServer() webhook.Server           { return nil }
-func (f *fakeManager) GetConfig() *rest.Config                    { return nil }
-func (f *fakeManager) GetConverterRegistry() conversion.Registry   { return nil }
+func (f *fakeManager) GetHTTPClient() *http.Client                       { return nil }
+func (f *fakeManager) GetWebhookServer() webhook.Server                  { return nil }
+func (f *fakeManager) GetConfig() *rest.Config                           { return nil }
+func (f *fakeManager) GetConverterRegistry() conversion.Registry         { return nil }
 func (f *fakeManager) GetEventRecorder(name string) events.EventRecorder { return nil }
 
 func TestFindRouteHost(t *testing.T) {

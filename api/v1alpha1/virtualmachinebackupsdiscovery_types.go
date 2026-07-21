@@ -19,6 +19,7 @@ package v1alpha1
 import (
 	"github.com/migtools/oadp-vm-file-restore/api/v1alpha1/types"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
 )
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
@@ -199,5 +200,9 @@ type VirtualMachineBackupsDiscoveryList struct {
 }
 
 func init() {
-	SchemeBuilder.Register(&VirtualMachineBackupsDiscovery{}, &VirtualMachineBackupsDiscoveryList{})
+	SchemeBuilder.Register(func(scheme *runtime.Scheme) error {
+		scheme.AddKnownTypes(GroupVersion, &VirtualMachineBackupsDiscovery{}, &VirtualMachineBackupsDiscoveryList{})
+		metav1.AddToGroupVersion(scheme, GroupVersion)
+		return nil
+	})
 }
